@@ -1,4 +1,3 @@
-# flake.nix
 {
   description = "Python development environment using Poetry and Nix";
 
@@ -17,14 +16,14 @@
         # Specify the Python version provided by Nix.
         # This version MUST meet the minimum requirement specified in your
         # project's pyproject.toml file (e.g., python = ">=3.14").
-        # Adjust pkgs.python314 below accordingly (e.g., pkgs.python313, pkgs.python312).
+        # Adjust pkgs.python312 below accordingly (e.g., pkgs.python313, pkgs.python312).
         pythonVersion = pkgs.python312;
         # --- IMPORTANT ---
 
         devPackages = [
-          pythonVersion       # Provides the base Python interpreter
-          pkgs.poetry         # Poetry for dependency management
-          pkgs.python312Packages.pytest  # Pytest available in the shell
+          pythonVersion                             # Base Python interpreter
+          pkgs.poetry                               # Poetry for dependency management
+          pkgs.python312Packages.pytest             # Pytest available in the shell (if needed outside Poetry)
         ];
 
       in
@@ -38,25 +37,23 @@
             # Configure Poetry to create the virtual environment inside the project directory
             poetry config virtualenvs.in-project true --local || true
 
-            # We removed 'poetry config virtualenvs.prefer-active-python true --local'
-            # as it caused warnings with your Poetry version and is often the default behavior anyway.
-            # Poetry will use the active Python (provided by Nix via 'pythonVersion' above)
-            # to bootstrap the virtual environment.
-
             # Check if pyproject.toml exists
-              if [ -f pyproject.toml ]; then
-                echo "Setting up Python virtual environment and installing dependencies with Poetry..."
-                poetry sync
+            if [ -f pyproject.toml ]; then
+              echo "Setting up Python virtual environment and installing dependencies with Poetry (including dev extras)..."
+              # Install all dependencies including the optional dev dependencies
+              poetry install --with dev
 
-                # Automatically activate the virtual environment
-                if [ -f .venv/bin/activate ]; then
-                  echo "Activating Poetry virtual environment..."
-                  source .venv/bin/activate
+              # Automatically activate the virtual environment if it exists
+              if [ -f .venv/bin/activate ]; then
+                echo "Activating Poetry virtual environment..."
+                source .venv/bin/activate
 
-                  # Add src directory to PYTHONPATH
-                  export PYTHONPATH="$PYTHONPATH:$(pwd)"
-                  echo "Added $(pwd) to PYTHONPATH"
-                fi
+                # Add the current directory to PYTHONPATH, so your project modules are accessible
+                export PYTHONPATH="$PYTHONPATH:$(pwd)"
+                echo "Added $(pwd) to PYTHONPATH"
+              else
+                echo "Warning: .venv not found even after installation."
+              fi
 
               echo ""
               echo "------------------------------------------------------------------------"
@@ -68,10 +65,10 @@
               echo ""
               echo "Run commands within the managed environment using:"
               echo "  poetry run <your_command>"
-              echo "Or activate manually: source ./.venv/bin/activate"
+              echo "Or activate manually: source .venv/bin/activate"
               echo "------------------------------------------------------------------------"
             else
-              echo "WARNING: 'pyproject.toml' not found. Skipping 'poetry install'."
+              echo "WARNING: 'pyproject.toml' not found. Skipping Poetry dependency installation."
             fi
 
             echo "--------------------------------------------------------------"
@@ -82,6 +79,7 @@
             echo "Dependency management is handled by Poetry."
             echo "--------------------------------------------------------------"
 
+            # Clear SOURCE_DATE_EPOCH to avoid potential conflicts in reproducible builds
             unset SOURCE_DATE_EPOCH
           '';
         };
