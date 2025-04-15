@@ -1,0 +1,93 @@
+[
+  {
+    "dmd_id": "DMD1",
+    "dc_title": "Sample Document 1",
+    "dc_creator": "John Doe",
+    "dc_subject": "Digital Archives",
+    "dc_description": "This is a sample document for testing the METS XML synthesis pipeline.",
+    "dc_publisher": "University Library",
+    "dc_date": "2023-01-15",
+    "dc_type": "Text",
+    "dc_format": "application/pdf",
+    "dc_identifier": "DOI:10.1234/sample.1",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD2",
+    "dc_title": "Sample Image Collection",
+    "dc_creator": "Jane Smith",
+    "dc_subject": "Photography, Archives",
+    "dc_description": "A collection of sample images for testing.",
+    "dc_publisher": "University Library",
+    "dc_date": "2023-02-20",
+    "dc_type": "Image",
+    "dc_format": "image/jpeg",
+    "dc_identifier": "DOI:10.1234/sample.2",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD3",
+    "dc_title": "Sample Audio Recording",
+    "dc_creator": "Audio Archives Team",
+    "dc_subject": "Oral History, Interviews",
+    "dc_description": "Sample audio recording of an interview.",
+    "dc_publisher": "University Library",
+    "dc_date": "2023-03-10",
+    "dc_type": "Sound",
+    "dc_format": "audio/mp3",
+    "dc_identifier": "DOI:10.1234/sample.3",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD4",
+    "dc_title": "Research Dataset",
+    "dc_creator": "Research Group Alpha",
+    "dc_subject": "Data Science, Research Data",
+    "dc_description": "Sample research dataset with accompanying documentation.",
+    "dc_publisher": "University Data Repository",
+    "dc_date": "2023-04-05",
+    "dc_type": "Dataset",
+    "dc_format": "application/zip",
+    "dc_identifier": "DOI:10.1234/sample.4",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD5",
+    "dc_title": "Technical Documentation",
+    "dc_creator": "Technical Writing Team",
+    "dc_subject": "Documentation, Technical Specifications",
+    "dc_description": "Technical documentation for the sample project.",
+    "dc_publisher": "University Library",
+    "dc_date": "2023-05-22",
+    "dc_type": "Text",
+    "dc_format": "application/pdf",
+    "dc_identifier": "DOI:10.1234/sample.5",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD6",
+    "dc_title": "Sample Video Collection",
+    "dc_creator": "Video Production Team",
+    "dc_subject": "Film, Multimedia Archives",
+    "dc_description": "A collection of sample videos for testing the multimedia pipeline.",
+    "dc_publisher": "University Film Archive",
+    "dc_date": "2023-06-10",
+    "dc_type": "Video",
+    "dc_format": "video/mp4",
+    "dc_identifier": "DOI:10.1234/sample.6",
+    "dc_language": "en"
+  },
+  {
+    "dmd_id": "DMD7",
+    "dc_title": "Archival Letters",
+    "dc_creator": "Historical Society",
+    "dc_subject": "Archives, Correspondence",
+    "dc_description": "A curated collection of archival letters from historical figures.",
+    "dc_publisher": "City Archives",
+    "dc_date": "2023-07-01",
+    "dc_type": "Text",
+    "dc_format": "application/pdf",
+    "dc_identifier": "DOI:10.1234/sample.7",
+    "dc_language": "en"
+  }
+]
