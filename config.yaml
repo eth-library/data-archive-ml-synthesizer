@@ -1,0 +1,50 @@
+# Configuration for METS XML Synthesis Pipeline
+
+# Input data paths
+input:
+  dmdsec_path: "data/input/dmdSec.json"
+  file_path: "data/input/file.json"
+  structmap_path: "data/input/structMap.json"
+
+# Output paths
+output:
+  metadata_path: "data/output/metadata.yaml"
+  model_path: "data/output/model.pkl"
+  xml_output_path: "data/output/synthetic_mets.xml"
+  synthetic_data_paths:
+    dmdSec: "data/output/synthetic_dmdSec.json"
+    file: "data/output/synthetic_file.json"
+    structMap: "data/output/synthetic_structMap.json"
+
+# Model configuration
+model:
+  # Type of model to use: 'hma1' or 'multi_table'
+  type: "multi_table"
+  # Random seed for reproducibility
+  random_seed: 42
+
+# Sampling configuration
+sampling:
+  # Number of rows to generate for each table
+  num_rows:
+    dmdSec: 10
+    file: 20
+    structMap: 30
+
+# Validation configuration
+validation:
+  # Whether to validate the generated XML
+  enabled: true
+  # Paths to XSD schemas
+  schema_paths:
+    mets: "schemas/mets.xsd"
+    dc: "schemas/dc.xsd"
+
+# Logging configuration
+logging:
+  # Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  # Logging format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  # Optional log file path
+  file: "logs/pipeline.log"
