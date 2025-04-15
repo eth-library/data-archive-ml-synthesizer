@@ -27,12 +27,16 @@ dependencies = [
 dev = [
   "black",
   "flake8",
-  "ipython"
+  "ipython",
+  "pytest"
 ]
 
 [tool.pytest]
 testpaths = ["tests"]
 python_files = "test_*.py smoke_test.py"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
 
 [project.urls]
 Homepage = "https://github.com/yourusername/data-archive-ml-synthesizer"
