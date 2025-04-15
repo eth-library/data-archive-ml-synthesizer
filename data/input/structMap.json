@@ -1,0 +1,128 @@
+[
+  {
+    "struct_id": "STRUCT1",
+    "dmd_id": "DMD1",
+    "parent_id": null,
+    "label": "Sample Document Collection",
+    "order": 1,
+    "type": "collection",
+    "file_id": null
+  },
+  {
+    "struct_id": "STRUCT2",
+    "dmd_id": "DMD1",
+    "parent_id": "STRUCT1",
+    "label": "Sample Document 1",
+    "order": 1,
+    "type": "document",
+    "file_id": "FILE1"
+  },
+  {
+    "struct_id": "STRUCT3",
+    "dmd_id": "DMD2",
+    "parent_id": "STRUCT1",
+    "label": "Sample Image Collection",
+    "order": 2,
+    "type": "collection",
+    "file_id": null
+  },
+  {
+    "struct_id": "STRUCT4",
+    "dmd_id": "DMD2",
+    "parent_id": "STRUCT3",
+    "label": "Sample Image 1",
+    "order": 1,
+    "type": "image",
+    "file_id": "FILE2"
+  },
+  {
+    "struct_id": "STRUCT5",
+    "dmd_id": "DMD2",
+    "parent_id": "STRUCT3",
+    "label": "Sample Image 2",
+    "order": 2,
+    "type": "image",
+    "file_id": "FILE3"
+  },
+  {
+    "struct_id": "STRUCT6",
+    "dmd_id": "DMD3",
+    "parent_id": "STRUCT1",
+    "label": "Sample Audio Recording",
+    "order": 3,
+    "type": "audio",
+    "file_id": "FILE4"
+  },
+  {
+    "struct_id": "STRUCT7",
+    "dmd_id": "DMD4",
+    "parent_id": null,
+    "label": "Research Data Collection",
+    "order": 2,
+    "type": "collection",
+    "file_id": null
+  },
+  {
+    "struct_id": "STRUCT8",
+    "dmd_id": "DMD4",
+    "parent_id": "STRUCT7",
+    "label": "Research Dataset",
+    "order": 1,
+    "type": "dataset",
+    "file_id": "FILE5"
+  },
+  {
+    "struct_id": "STRUCT9",
+    "dmd_id": "DMD4",
+    "parent_id": "STRUCT7",
+    "label": "Dataset Metadata",
+    "order": 2,
+    "type": "metadata",
+    "file_id": "FILE6"
+  },
+  {
+    "struct_id": "STRUCT10",
+    "dmd_id": "DMD5",
+    "parent_id": null,
+    "label": "Technical Documentation",
+    "order": 3,
+    "type": "document",
+    "file_id": "FILE7"
+  },
+  {
+    "struct_id": "STRUCT11",
+    "dmd_id": "DMD6",
+    "parent_id": null,
+    "label": "Sample Video Collection",
+    "order": 4,
+    "type": "collection",
+    "file_id": null
+  },
+  {
+    "struct_id": "STRUCT12",
+    "dmd_id": "DMD6",
+    "parent_id": "STRUCT11",
+    "label": "Sample Video",
+    "order": 1,
+    "type": "video",
+    "file_id": "FILE8"
+  },
+  {
+    "struct_id": "STRUCT13",
+    "dmd_id": "DMD6",
+    "parent_id": "STRUCT11",
+    "label": "Video Thumbnail",
+    "order": 2,
+    "type": "image",
+    "file_id": "FILE9"
+  },
+  {
+    "struct_id": "STRUCT14",
+    "dmd_id": "DMD7",
+    "parent_id": null,
+    "label": "Archival Letters",
+    "order": 5,
+    "type": "document",
+    "file_id": "FILE10"
+  }
+]
