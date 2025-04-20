@@ -18,8 +18,6 @@ output:
 
 # Model configuration
 model:
-  # Type of model to use: 'hma1' or 'multi_table'
-  type: "multi_table"
   # Random seed for reproducibility
   random_seed: 42
 
