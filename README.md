@@ -1,10 +1,5 @@
 # Data Archive ML Synthesizer
 
-A machine learning pipeline designed to generate realistic synthetic METS XML documents for testing and development
-purposes. This tool enables digital preservation teams to produce high-quality, representative test data achine learning
-pipeline that generates realistic synthetic METS XML documents for digital archives testing and development. This tool
-helps digital preservation teams create high-quality test data without exposing sensitive information.
-
 > ### Project Status Notice  
 > This project is in **beta** and serves as a proof‑of‑concept—actively evolving and not fully tested for production.  
 >  
