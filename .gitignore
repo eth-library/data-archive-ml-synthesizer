@@ -1,0 +1,8 @@
+# Direnv environment
+/.direnv/
+
+# Python Virtual Environment
+/.venv/
+
+# Ignore all output directories under data folder
+/data/output/
