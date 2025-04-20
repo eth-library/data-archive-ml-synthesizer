@@ -1,27 +1,39 @@
 # Data Archive ML Synthesizer
 
+A machine learning pipeline designed to generate realistic synthetic METS XML documents for testing and development
+purposes. This tool enables digital preservation teams to produce high-quality, representative test data achine learning
+pipeline that generates realistic synthetic METS XML documents for digital archives testing and development. This tool
+helps digital preservation teams create high-quality test data without exposing sensitive information.
+
 ## Table of Contents
+
 1. [Project Overview](#project-overview)
 2. [Project Structure](#project-structure)
 3. [Core Tools and Dependencies](#core-tools-and-dependencies)
-4. [Environment Setup](#environment-setup)
-5. [Getting Started](#getting-started)
+4. [Getting Started](#getting-started)
+5. [Environment Setup](#environment-setup)
 6. [Configuration](#configuration)
 7. [Architecture](#architecture)
 8. [Testing](#testing)
-9. [Debugging](#debugging)
+9. [Logging](#logging)
+10. [Common Issues and Solutions](#common-issues-and-solutions)
+11. [Reproducibility](#reproducibility)
 
 ---
 
 ## Project Overview
 
-This pipeline trains on a set of METS XML documents to learn their structure and content patterns, producing realistic
-synthetic data. It preserves element nesting and relationships and enforces XSD compliance. The generated files can be used as
-test data for validating systems and workflows.
+The **Data Archive ML Synthesizer** learns the structure and content patterns of existing METS XML documents to generate
+realistic synthetic data. It addresses the challenge of creating test datasets without exposing actual archival records.
+
+### Key Benefits
+
+- Generate unlimited XSD-compliant test data for validation and development
+- Preserve structural complexity and real-world patterns
+- Bypass sensitive data concerns with randomized, representative content
 
 The pipeline follows a hybrid approach:
 
-- The structure of the XML (tags, hierarchy, schema) is defined using XML templates
 - The content inside the tags (titles, dates, agent names, mimetypes) is generated using generative machine learning (
   via SDV)
 - These values are inserted into predefined XML templates to guarantee schema compliance and structural validity
@@ -103,6 +115,40 @@ For XML handling, we use:
 These tools ensure that our synthetic METS XML documents are well-formed and valid according to the METS, Dublin Core,
 and DNX schemas.
 
+## Getting Started
+
+This section provides a quick guide to get you up and running with the Data Archive ML Synthesizer.
+
+### Running the Pipeline
+
+To run the pipeline from source:
+
+```bash
+# Run with default configuration (config.yaml)
+python -m src.data_archive_ml_synthesizer.pipeline
+
+# Or specify a custom configuration file
+python -m src.data_archive_ml_synthesizer.pipeline --config custom_config.yaml
+```
+
+### Using with direnv (Optional)
+
+For an even smoother workflow, you can use [direnv](https://direnv.net/) to automatically enter the development
+environment when you navigate to the project directory:
+
+1. Install direnv following the instructions at https://direnv.net/
+2. Create a `.envrc` file in the project root with the content:
+   ```
+   use flake
+   ```
+3. Allow direnv to use this configuration:
+   ```bash
+   direnv allow
+   ```
+
+Now the environment will be automatically activated when you enter the project directory and deactivated when you leave.
+The shellHook will automatically configure Poetry, install dependencies, and activate the virtual environment.
+
 ## Environment Setup
 
 ### Prerequisites
@@ -162,50 +208,6 @@ The system is designed to be flexible:
 - For Python developers: Poetry manages Python dependencies in the local .venv
 - For CI/CD: The exact same environment can be reproduced on any system with Nix
 
-## Getting Started
-
-This section provides a quick guide to get you up and running with the METS ML Synthesizer.
-
-### Running the Pipeline
-
-To run the pipeline:
-
-```bash
-# Run with default configuration (config.yaml)
-python -m src.data_archive_ml_synthesizer.pipeline
-
-# Or specify a custom configuration file
-python -m src.data_archive_ml_synthesizer.pipeline --config custom_config.yaml
-```
-
-### Using with direnv (Optional)
-
-For an even smoother workflow, you can use [direnv](https://direnv.net/) to automatically enter the development
-environment when you navigate to the project directory:
-
-1. Install direnv following the instructions at https://direnv.net/
-2. Create a `.envrc` file in the project root with the content:
-   ```
-   use flake
-   ```
-3. Allow direnv to use this configuration:
-   ```bash
-   direnv allow
-   ```
-
-Now the environment will be automatically activated when you enter the project directory and deactivated when you leave.
-The shellHook will automatically configure Poetry, install dependencies, and activate the virtual environment.
-
-#### Troubleshooting direnv with Nix Flakes
-
-If you encounter an error when using direnv, try:
-
-- Running `nix flake update` to refresh the lock file
-- Deleting the `.direnv` directory and running `direnv allow` again
-
-> **Note**: The flake.nix creates and manages a .venv for you using Poetry. This approach gives you the reproducibility
-> of Nix for system dependencies with the flexibility of Poetry for Python dependency management.
-
 ## Configuration
 
 The pipeline is configured through the `config.yaml` file. Key configuration options include:
@@ -218,6 +220,28 @@ The pipeline is configured through the `config.yaml` file. Key configuration opt
 See the comments in `config.yaml` for detailed descriptions of each option.
 
 ## Architecture
+
+### System Overview
+
+The Data Archive ML Synthesizer follows a modular architecture that separates concerns between data loading, model
+training, synthetic data generation, and XML reassembly. This design allows for flexibility in replacing or enhancing
+individual components.
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│                 │     │                 │     │                 │     │                 │
+│  Input Data     │────▶│  ML Training    │────▶│  Synthetic Data │────▶│  XML Assembly   │
+│  Processing     │     │  Pipeline       │     │  Generation     │     │  & Validation   │
+│                 │     │                 │     │                 │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘     └─────────────────┘
+       │                       │                       │                       │
+       ▼                       ▼                       ▼                       ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│ loader.py       │     │ model.py        │     │ sampler.py      │     │ reassembler.py  │
+│ metadata_       │     │ HMASynthesizer  │     │ Synthetic       │     │ validator.py    │
+│ builder.py      │     │                 │     │ DataFrames      │     │                 │
+└─────────────────┘     └─────────────────┘     └─────────────────┘     └─────────────────┘
+```
 
 ### Module Descriptions
 
@@ -299,18 +323,38 @@ The project includes a comprehensive test suite for verifying the functionality 
 information about the test suite, including test structure, fixtures, running tests, and writing new tests, see
 the [tests/README.md](tests/README.md) file.
 
-## Debugging
+## Logging
+The pipeline includes logging at various levels to help with troubleshooting. To enable more detailed logging, set the
+`level` parameter in the `logging` section of `config.yaml` to `DEBUG`.
 
-The pipeline includes logging at various levels to help with debugging. To enable more detailed logging, set the `level`
-parameter in the `logging` section of `config.yaml` to `DEBUG`.
+## Common Issues and Solutions
 
-### Common Issues
+### Missing Input Files
 
-- **Missing Input Files**: Ensure all required JSON files are present in the specified input directory
-- **Schema Validation Errors**: Check that the generated XML conforms to the provided schemas
-- **Model Training Failures**: May occur with insufficient or inconsistent input data
+- **Issue**: Pipeline fails with "File not found" errors
+- **Solution**: Ensure all required JSON files are present in the specified input directory
+- **Check**: Run `ls -la data/input/` to verify file existence and permissions
 
-### Reproducibility
+### Schema Validation Errors
+
+- **Issue**: Generated XML fails validation against XSD schemas
+- **Solution**: Check that the XML templates match the expected schema
+- **Debug**: Set logging to DEBUG to see detailed validation errors
+
+### Model Training Failures
+
+- **Issue**: SDV model training fails or produces poor results
+- **Solution**: This may occur with insufficient or inconsistent input data
+- **Fix**: Increase the size of your training dataset or check for data inconsistencies
+
+### direnv Issues
+
+- **Issue**: Environment not loading correctly with direnv
+- **Solution**:
+    - Run `nix flake update` to refresh the lock file
+    - Delete the `.direnv` directory and run `direnv allow` again
+
+## Reproducibility
 
 The pipeline uses a fixed random seed (configurable in `config.yaml`) to ensure reproducible results. This means that
 running the pipeline multiple times with the same input data and configuration should produce identical synthetic data.
