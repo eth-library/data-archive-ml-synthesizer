@@ -30,4 +30,4 @@ python_files = "test_*.py smoke_test.py"
 pytest = "^8.3.5"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/data-archive-ml-synthesizer"
+Homepage = "https://github.com/eth-library/data-archive-ml-synthesizer"
