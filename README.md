@@ -102,7 +102,7 @@ This project uses Nix flakes to provide a fully reproducible development environ
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/data-archive-ml-synthesizer.git
+   git clone https://github.com/eth-library/data-archive-ml-synthesizer.git
    cd data-archive-ml-synthesizer
    ```
 
