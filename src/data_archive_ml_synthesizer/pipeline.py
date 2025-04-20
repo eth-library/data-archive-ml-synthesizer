@@ -8,6 +8,7 @@ logs progress and errors using the built-in logging module.
 """
 
 import argparse
+import os
 import logging
 import sys
 import time
@@ -25,11 +26,15 @@ from src.data_archive_ml_synthesizer.validator import XMLValidator
 
 def setup_logging(config: Dict[str, Any]) -> None:
     """
-    Set up logging configuration.
+    Set up the logging configuration.
 
     Args:
         config: Dictionary containing configuration parameters.
     """
+    # Create a logs directory if it doesn't exist
+    log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'logs')
+    os.makedirs(log_dir, exist_ok=True)
+
     log_config = config.get('logging', {})
     log_level = getattr(logging, log_config.get('level', 'INFO'))
     log_format = log_config.get('format', '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
