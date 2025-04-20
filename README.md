@@ -5,6 +5,15 @@ purposes. This tool enables digital preservation teams to produce high-quality, 
 pipeline that generates realistic synthetic METS XML documents for digital archives testing and development. This tool
 helps digital preservation teams create high-quality test data without exposing sensitive information.
 
+> [!NOTE] ℹ️ **Beta / Proof‑of‑Concept**  
+> Welcome! This project is in **beta** (proof‑of‑concept) stage—actively evolving and not yet fully tested for production.  
+>  
+> - **Stability:** Bugs, breaking changes, or incomplete features may occur.  
+> - **Evolution:** APIs and behaviors can change as we refine functionality.  
+>  
+> Comes as‑is, with no guarantees on stability.  
+> We’re grateful for your patience and any suggestions you share!
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
