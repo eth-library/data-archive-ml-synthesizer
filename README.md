@@ -1,5 +1,18 @@
 # Data Archive ML Synthesizer
 
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Project Structure](#project-structure)
+3. [Core Tools and Dependencies](#core-tools-and-dependencies)
+4. [Environment Setup](#environment-setup)
+5. [Getting Started](#getting-started)
+6. [Configuration](#configuration)
+7. [Architecture](#architecture)
+8. [Testing](#testing)
+9. [Debugging](#debugging)
+
+---
+
 ## Project Overview
 
 This pipeline trains on a set of METS XML documents to learn their structure and content patterns, producing realistic
