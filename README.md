@@ -33,9 +33,8 @@ realistic synthetic data. It addresses the challenge of creating test datasets w
 
 ### Key Benefits
 
-- Generate unlimited XSD-compliant test data for validation and development
+- Generate XSD-compliant test data for validation and development
 - Preserve structural complexity and real-world patterns
-- Bypass sensitive data concerns with randomized, representative content
 
 The pipeline follows a hybrid approach:
 
